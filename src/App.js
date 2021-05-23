@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Productos from './views/Productos/Productos'
+import ProductAdd from './views/Productos/add/add'
+
+import 'bulma/css/bulma.css'
+
+export default function App() {
+  const [editProduct, setEditProduct] = useState(false)
+
+  const hadleClickAdd = () => setEditProduct(!editProduct)
+
+  const ComponentSelect = () => {
+    if (!editProduct) return <Productos hadleClickAdd={ hadleClickAdd } />
+    return <ProductAdd hadleClickAdd={ hadleClickAdd } /> 
+  }
+
+  return <ComponentSelect />
 }
-
-export default App;
