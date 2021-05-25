@@ -1,19 +1,23 @@
-import React, { useState } from "react"
-
-import Productos from './views/Productos/Productos'
-import ProductAdd from './views/Productos/add/add'
-
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import routes from './Routes'
 import 'bulma/css/bulma.css'
 
 export default function App() {
-  const [editProduct, setEditProduct] = useState(false)
-
-  const hadleClickAdd = () => setEditProduct(!editProduct)
-
-  const ComponentSelect = () => {
-    if (!editProduct) return <Productos hadleClickAdd={ hadleClickAdd } />
-    return <ProductAdd hadleClickAdd={ hadleClickAdd } /> 
-  }
-
-  return <ComponentSelect />
+  return (
+    <Router>
+      <div>
+        <Switch>
+          {routes.map((route) => (
+            <Route
+              key={ route.path }
+              path={ route.path }
+              component={ route.component }
+              exact={ route.exact }
+            />
+          ))}
+        </Switch>   
+      </div>
+    </Router>
+  );
 }
